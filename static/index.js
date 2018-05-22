@@ -3,7 +3,7 @@ var $sampleMetadata = document.getElementById("sampleMetadata");
 var sample_now = "BB_940"
 // Inital loading page
 function init() {
-    alert("inside init again, sample_now: " + sample_now);
+    console.log("inside init again, sample_now: " + sample_now);
     url = "/metadata/" + sample_now;
     d3.json(url, function(error, response) {
         if (error) return console.log(error);
@@ -18,7 +18,7 @@ function init() {
             
                 //var p = document.createElement("p");
                 //alert("Sample: " + sample_now);
-                
+                metadata_info.innerHTML = ""
                 metadata_info.innerHTML = `${keys[i]}: ${response[keys[i]]}`;
     
                 metadata_info.appendChild(p);
@@ -58,7 +58,6 @@ function init() {
         var data = [{
             values: labels,
             labels: vals,
-            // hovertext: bacteriaNamesPie,
             hoverinfo: {bordercolor: 'black'},
             type: 'pie'
             }];
@@ -120,7 +119,7 @@ function init() {
 
 function optionChanged(val){
     sample_now = val;
-    alert("On change!")
+    //alert("On change!")
     init();
 
 }
