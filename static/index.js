@@ -19,7 +19,7 @@ function init() {
                 //var p = document.createElement("p");
                 //alert("Sample: " + sample_now);
                 
-                p.innerHTML = `${keys[i]}: ${response[keys[i]]}`;
+                metadata_info.innerHTML = `${keys[i]}: ${response[keys[i]]}`;
     
                 metadata_info.appendChild(p);
         }
@@ -84,7 +84,9 @@ function init() {
         }
     
     });
-    Plotly.d3.json('/samples/BB_947', function(error, bubl_response){
+
+    bubl_url = "/samples/" + sample_now; //eg. '/samples/BB_947'
+    Plotly.d3.json(bubl_url, function(error, bubl_response){
        
         
         var bubbleDiv = document.getElementById("bubble");
