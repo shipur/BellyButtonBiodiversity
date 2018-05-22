@@ -3,6 +3,7 @@ var $sampleMetadata = document.getElementById("sampleMetadata");
 var sample_now = "BB_940"
 // Inital loading page
 function init() {
+    alert("inside init again, sample_now: " + sample_now);
     url = "/metadata/" + sample_now;
     d3.json(url, function(error, response) {
         if (error) return console.log(error);
@@ -12,24 +13,34 @@ function init() {
         var keys = Object.keys(response);
         console.log(keys);
         
-        var table = document.getElementById("sampleMetadata");
+        metadata_info = document.getElementById("sampleMetadata");
+        for(var i=0; i<response[keys[i]].length; i++){
+            
+                //var p = document.createElement("p");
+                //alert("Sample: " + sample_now);
+                
+                p.innerHTML = `${keys[i]}: ${response[keys[i]]}`;
+    
+                metadata_info.appendChild(p);
+        }
+        // var table = document.getElementById("sampleMetadata");
        
-        for (var i = 0; i < keys.length; i++) {
+        // for (var i = 0; i < keys.length; i++) {
         
-            var temp = response[keys[i]];
+        //     var temp = response[keys[i]];
 
-            for(var j=0; j<temp.length; j++){
-            var tr_elem = document.createElement("TR");
-            tr_elem.setAttribute("id", "sample_cells");
-            table.appendChild(tr_elem);
-            var td_elem = document.createElement("TD");
-            var temp1 = temp[j];//${keys[i]}: ${response[keys[i]]};
-            var t = document.createTextNode(temp1);
-            td_elem.appendChild(t);
-            document.getElementById("sample_cells").appendChild(td_elem);
-            }
+        //     for(var j=0; j<temp.length; j++){
+        //     var tr_elem = document.createElement("TR");
+        //     tr_elem.setAttribute("id", "sample_cells");
+        //     table.appendChild(tr_elem);
+        //     var td_elem = document.createElement("TD");
+        //     var temp1 = temp[j];//${keys[i]}: ${response[keys[i]]};
+        //     var t = document.createTextNode(temp1);
+        //     td_elem.appendChild(t);
+        //     document.getElementById("sample_cells").appendChild(td_elem);
+        //     }
 
-        };
+        // };
        
     });
 
@@ -73,7 +84,7 @@ function init() {
         }
     
     });
-    Plotly.d3.json('/samples/BB_940', function(error, bubl_response){
+    Plotly.d3.json('/samples/BB_947', function(error, bubl_response){
        
         
         var bubbleDiv = document.getElementById("bubble");
@@ -107,6 +118,8 @@ function init() {
 
 function optionChanged(val){
     sample_now = val;
+    alert("On change!")
+    init();
 
 }
 
