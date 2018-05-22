@@ -14,33 +14,14 @@ function init() {
         console.log(keys);
         
         metadata_info = document.getElementById("sampleMetadata");
-        for(var i=0; i<response[keys[i]].length; i++){
-            
-                //var p = document.createElement("p");
-                //alert("Sample: " + sample_now);
-                metadata_info.innerHTML = ""
-                metadata_info.innerHTML = `${keys[i]}: ${response[keys[i]]}`;
-    
-                metadata_info.appendChild(p);
-        }
-        // var table = document.getElementById("sampleMetadata");
-       
-        // for (var i = 0; i < keys.length; i++) {
+        metadata_info.innerHTML = "";
+        for(var i=0; i<keys.length; i++){
+            var p = document.createElement("p");
+            console.log("response: "+ response )
+            p.innerHTML = keys[i] + ": " + response[keys[i]];
+            metadata_info.appendChild(p);
         
-        //     var temp = response[keys[i]];
-
-        //     for(var j=0; j<temp.length; j++){
-        //     var tr_elem = document.createElement("TR");
-        //     tr_elem.setAttribute("id", "sample_cells");
-        //     table.appendChild(tr_elem);
-        //     var td_elem = document.createElement("TD");
-        //     var temp1 = temp[j];//${keys[i]}: ${response[keys[i]]};
-        //     var t = document.createTextNode(temp1);
-        //     td_elem.appendChild(t);
-        //     document.getElementById("sample_cells").appendChild(td_elem);
-        //     }
-
-        // };
+        }
        
     });
 
@@ -65,8 +46,9 @@ function init() {
         var layout = {
             title: "Samples"}
         
-        var PIE = document.getElementById('pie');
-        Plotly.plot(PIE, data, layout);
+        var pie_plot = document.getElementById('pie');
+        //pie_plot.innerHTML = "";
+        Plotly.plot(pie_plot, data, layout);
     });
 
     Plotly.d3.json('/names', function(error, names_response){
@@ -75,6 +57,7 @@ function init() {
         console.log("Names Response:" + names_response);
         
         var name_select = document.getElementById('selDataset');
+        name_select.innerHTML = "";
         for(i=0; i<names_response.length; i++){
             var elem = document.createElement("option");
             elem.textContent = names_response[i];
@@ -89,7 +72,8 @@ function init() {
        
         
         var bubbleDiv = document.getElementById("bubble");
- 
+        //bubbleDiv.innerHTML = "";
+
         var traceA = {
         type: "scatter",
         mode: "markers",
